@@ -3,4 +3,7 @@ numpy
 seaborn
 matplotlib
 streamlit
+scikit-learn
+dill
+pickle
 -e .
