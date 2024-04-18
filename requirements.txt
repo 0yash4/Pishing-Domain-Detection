@@ -6,4 +6,8 @@ streamlit
 scikit-learn
 dill
 pickle
+dnspyhton
+cymruwhois
+whois
+python-whois
 -e .
