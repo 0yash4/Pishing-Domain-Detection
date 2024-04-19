@@ -1,4 +1,6 @@
+import os
 import socket
+import ssl
 import sys
 import time
 from datetime import datetime
@@ -7,10 +9,16 @@ import dns.resolver
 import requests
 import whois
 from cymruwhois import Client
+from dotenv import load_dotenv
 
+import src.constants
 from src.exception import CustomException
 from src.logger import logging
 from src.url.url_substrings import URLSubStrings
+
+load_dotenv()
+API_KEY = os.getenv("API_KEY")
+CX_KEY = os.getenv("CX_KEY")
 
 
 class url_credentials():
@@ -109,42 +117,114 @@ class url_credentials():
             answers = dns.resolver.resolve(self.url_domain, 'NS')
             return len(answers)
         except dns.resolver.NXDOMAIN:
-            print("Error: Domain not found.")
+            logging.error("Domain not found.")
             return 0
         except dns.resolver.NoAnswer:
-            print("No nameservers found for", self.url_domain)
+            logging.error("No nameservers found for %s", self.url)
             return 0
         except dns.resolver.NoNameservers:
-            print("Error: No nameservers found.")
+            logging.error("No nameservers found.")
             return 0
         except Exception as e:
-            raise CustomException(e, sys)
+            logging.error("Error: %s", e)
+            return 0
     
     def qty_mx_servers(self):
         try:
             answers = dns.resolver.resolve(self.url_domain, 'MX')
             return len(answers)
         except dns.resolver.NXDOMAIN:
-            print("Error: Domain not found.")
+            logging.error("Domain not found.")
             return 0
         except dns.resolver.NoAnswer:
-            print("No nameservers found for", self.url_domain)
+            logging.error("No MX servers found for %s", self.url)
             return 0
         except dns.resolver.NoNameservers:
-            print("Error: No MX servers found.")
+            logging.error("No MX servers found.")
             return 0
         except Exception as e:
-            raise CustomException(e, sys)
-       
+            logging.error("Error: %s", e)
+            return 0
+    
+    def ttl_hostname(self):
+        try:
+            # Resolve the URL to get the TTL value
+            answers = dns.resolver.resolve(self.url_domain, 'A')
+            # Extract the TTL value from the first answer
+            ttl = answers.rrset.ttl
+            return ttl
+        except dns.resolver.NoAnswer:
+            logging.error("No answer found for", self.url)
+            return 0
+        except dns.resolver.NoNameservers:
+            logging.error("Error: No nameservers found.")
+            return 0
+        except Exception as e:
+            logging.error("Error:", e)
+            return 0
+        
+    def tls_ssl_certificate(self):
+        try:
+            # Establish a connection to the URL
+            context = ssl.create_default_context()
+            with socket.create_connection((self.url_domain, 443)) as sock:
+                with context.wrap_socket(sock, server_hostname=self.url_domain) as ssock:
+                    # The SSL certificate is considered valid if the connection succeeds
+                    return 1
+        except Exception as e:
+            # If any exception occurs, it means there is no valid SSL certificate
+            #logging.error("Error:", e)
+            return 0
+        
+    def qty_redirects(self):
+        try:
+            # Send an HTTP GET request to the URL
+            response = requests.get(self.url, allow_redirects=True)
+            
+            # Count the number of redirects in the history of the response
+            num_redirects = len(response.history)
+            return num_redirects
+        except Exception as e:
+            logging.error("Error:", e)
+            return 0
+        
+    def url_google_index(self):
+        try:
+            # API endpoint for Google Custom Search JSON API
+            api_key =  API_KEY # Replace 'YOUR_API_KEY' with your actual API key
+            cx =  CX_KEY # Replace 'YOUR_CX' with your actual search engine ID
+            endpoint = f"https://www.googleapis.com/customsearch/v1?key={api_key}&cx={cx}&q=site:{self.url}"
+
+            # Send a GET request to the API endpoint
+            response = requests.get(endpoint)
+
+            # Check if the response is successful and if the URL is present in the search results
+            if response.ok:
+                data = response.json()
+                items = data.get('items', [])
+                for item in items:
+                    if item['link'] == self.url:
+                        return 1
+            return 0
+        except Exception as e:
+            logging.error("Error:", e)
+            return 0
+
+
           
 if __name__ == "__main__":
-    url = url_credentials("https://www.youtube.com/")
-    print(url.time_response())
-    print(url.domain_spf())
-    print(url.asn_ip())
+    url = url_credentials("https://twitter.com/")
+    print(API_KEY)
+    print("time_response", url.time_response())
+    print("domain_spf", url.domain_spf())
+    print("asn_ip", url.asn_ip())
     activation_days, expiration_days = url.time_domain_activation_expiration()
-    print(activation_days)
-    print(expiration_days)
-    print(url.qty_ip_resolved())
-    print(url.qty_nameservers())
-    print(url.qty_mx_servers())
+    print("activation_days are :", activation_days)
+    print("expiration_days are :", expiration_days)
+    print("qty_ip_resolved", url.qty_ip_resolved())
+    print("qty_nameservers", url.qty_nameservers())
+    print("qty_nameservers", url.qty_mx_servers())
+    print("ttl_hostname", url.ttl_hostname())
+    print("tls_ssl_certificate", url.tls_ssl_certificate())
+    print("qty_redirects", url.qty_redirects())
+    print("url_google_index", url.url_google_index())

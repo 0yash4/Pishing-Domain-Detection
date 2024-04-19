@@ -5,9 +5,8 @@ matplotlib
 streamlit
 scikit-learn
 dill
-pickle
-dnspyhton
 cymruwhois
 whois
 python-whois
+python-dotenv 
 -e .

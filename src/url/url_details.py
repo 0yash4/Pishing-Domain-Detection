@@ -37,7 +37,6 @@ class url_details:
                         
             # Return the the dictionary of sign counts
             return sign_counts  
-            logging.info("Counted the number of signs in URL")
             
         except Exception as e:
             raise CustomException(e, sys)
