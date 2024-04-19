@@ -32,4 +32,4 @@ if __name__ == "__main__":
     print("Path/File:", details.url_path_file())
     print("Directory:", details.url_directory())
     print("Parameters:", details.url_parameters())
-    print(details.url)
+    print(details.url_scheme() + "://" + details.url_domain())

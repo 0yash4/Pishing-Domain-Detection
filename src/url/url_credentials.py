@@ -11,7 +11,6 @@ import whois
 from cymruwhois import Client
 from dotenv import load_dotenv
 
-import src.constants
 from src.exception import CustomException
 from src.logger import logging
 from src.url.url_substrings import URLSubStrings
@@ -27,6 +26,7 @@ class url_credentials():
        self.url = self.url_substrings.url        #Assigning the URL from URL substring Constructor to the current class
        self.url_domain = self.url_substrings.url_domain()     #Getting the URL domain from the URL SubStrings class
        self.url_path_file = self.url_substrings.url_path_file()
+       self.url_scheme = self.url_substrings.url_scheme()
        self.url_parameters = self.url_substrings.url_parameters()
        self.url_directory = self.url_substrings.url_domain()
        #to avoid Path/File and Directory are same.
@@ -160,7 +160,7 @@ class url_credentials():
             logging.error("Error: No nameservers found.")
             return 0
         except Exception as e:
-            logging.error("Error:", e)
+            logging.error("ttl_hostname Error:", e)
             return 0
         
     def tls_ssl_certificate(self):
@@ -185,7 +185,7 @@ class url_credentials():
             num_redirects = len(response.history)
             return num_redirects
         except Exception as e:
-            logging.error("Error:", e)
+            logging.error("qty_redirects Error:", e)
             return 0
         
     def url_google_index(self):
@@ -207,13 +207,38 @@ class url_credentials():
                         return 1
             return 0
         except Exception as e:
-            logging.error("Error:", e)
+            logging.error("url_google_index Error:", e)
             return 0
+
+    def domain_google_index(self):
+        try:
+            # To check the the domain index on google we need to pass the Domain alongside Scheme and Oblique. Domain = "Scheme://Domain/" or "Https://youtube.com/ "
+            url_scheme_domain = self.url_scheme + "://" + self.url_domain + "/"
+            # API endpoint for Google Custom Search JSON API
+            api_key =  API_KEY # Replace 'YOUR_API_KEY' with your actual API key
+            cx =  CX_KEY # Replace 'YOUR_CX' with your actual search engine ID
+            endpoint = f"https://www.googleapis.com/customsearch/v1?key={api_key}&cx={cx}&q=site:{url_scheme_domain}"
+            
+            # Send a GET request to the API endpoint
+            response = requests.get(endpoint)
+
+            # Check if the response is successful and if the URL is present in the search results
+            if response.ok:
+                data = response.json()
+                items = data.get('items', [])
+                for item in items:
+                    if item['link'] == url_scheme_domain:
+                        return 1
+            return 0
+        except Exception as e:
+            logging.error("domain_google_index Error:", e)
+            return 0
+        
 
 
           
 if __name__ == "__main__":
-    url = url_credentials("https://twitter.com/")
+    url = url_credentials("https://www.youtube.com/shorts/HbkTVPGcB3w?app=desktop")
     print(API_KEY)
     print("time_response", url.time_response())
     print("domain_spf", url.domain_spf())
@@ -228,3 +253,4 @@ if __name__ == "__main__":
     print("tls_ssl_certificate", url.tls_ssl_certificate())
     print("qty_redirects", url.qty_redirects())
     print("url_google_index", url.url_google_index())
+    print("domain_google_index", url.domain_google_index())
