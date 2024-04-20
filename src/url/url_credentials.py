@@ -1,4 +1,5 @@
 import os
+import re
 import socket
 import ssl
 import sys
@@ -22,9 +23,12 @@ CX_KEY = os.getenv("CX_KEY")
 
 class url_credentials():
     def __init__(self, url: str):
-       self.url_substrings = URLSubStrings(url)  #Importing and creating the object of Url Substrings 
-       self.url = self.url_substrings.url        #Assigning the URL from URL substring Constructor to the current class
-       self.url_domain = self.url_substrings.url_domain()     #Getting the URL domain from the URL SubStrings class
+       #Importing and creating the object of Url Substrings 
+       self.url_substrings = URLSubStrings(url)  
+       #Assigning the URL from URL substring Constructor to the current class
+       self.url = self.url_substrings.url    
+       #Getting the URL domain from the URL SubStrings class    
+       self.url_domain = self.url_substrings.url_domain()     
        self.url_path_file = self.url_substrings.url_path_file()
        self.url_scheme = self.url_substrings.url_scheme()
        self.url_parameters = self.url_substrings.url_parameters()
@@ -234,11 +238,39 @@ class url_credentials():
             logging.error("domain_google_index Error:", e)
             return 0
         
-
-
+    def url_shortened(self):
+        try:
+           # Get the path component of the URL
+            path = self.url_path_file
+            # Check if the length of the path is shorter than a threshold
+            if len(path) <= 15:  # Adjust the threshold as needed
+                return 1
+            else: 
+                return 0
+        except Exception as e:
+            logging.error("url_shortened error", e)
+            return 0
+          
+    def email_in_url(self):
+        try:
+            # Regular expression to match an email address
+            email_regex = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
+            
+            # Search for email address in the URL
+            matches = re.findall(email_regex, self.url)
+            
+            # If matches are found, return True, otherwise return False
+            if matches:
+                return 1
+            else:
+                return 0  
+        except Exception as e:
+            logging.error("email_in_url error", e)
+            return 0 
+          
           
 if __name__ == "__main__":
-    url = url_credentials("https://www.youtube.com/shorts/HbkTVPGcB3w?app=desktop")
+    url = url_credentials("https://www.kaggle.com/")
     print(API_KEY)
     print("time_response", url.time_response())
     print("domain_spf", url.domain_spf())
@@ -254,3 +286,5 @@ if __name__ == "__main__":
     print("qty_redirects", url.qty_redirects())
     print("url_google_index", url.url_google_index())
     print("domain_google_index", url.domain_google_index())
+    print("url_shortened", url.url_shortened())
+    print("email_in_url", url.email_in_url())
