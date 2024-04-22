@@ -1,3 +1,4 @@
+import ipaddress
 import os
 import re
 import socket
@@ -267,10 +268,31 @@ class url_credentials():
         except Exception as e:
             logging.error("email_in_url error", e)
             return 0 
+        
+    def domain_in_ip(self):
+        try:
+            ipaddress.ip_address(self.url_domain)
+            return 1
+        except Exception as e:
+            logging.error("Domain in IP error", e)
+            return 0
+        
+    def server_client_domain(self):
+        try:
+            domain_lower = self.url_domain.lower()
+            if "server" in domain_lower:
+                return 1
+            elif "client" in domain_lower:
+                return 1
+            else:
+                return 0
+        except Exception as e:
+            CustomException(e, sys)
+
           
           
 if __name__ == "__main__":
-    url = url_credentials("https://www.kaggle.com/")
+    url = url_credentials("https://twitterserver.com/")
     print(API_KEY)
     print("time_response", url.time_response())
     print("domain_spf", url.domain_spf())
@@ -288,3 +310,5 @@ if __name__ == "__main__":
     print("domain_google_index", url.domain_google_index())
     print("url_shortened", url.url_shortened())
     print("email_in_url", url.email_in_url())
+    print("Domain in IP", url.domain_in_ip())
+    print("server_client_domain", url.server_client_domain())

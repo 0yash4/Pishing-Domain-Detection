@@ -25,7 +25,7 @@ class URLSubStrings:
 
 if __name__ == "__main__":
     # Example usage:
-    url = "https://www.example.com/page?query=example&lang=en"
+    url = "https://www.example.com/yas/page?query=example&lang=en?jsvoevnso"
     details = URLSubStrings(url)
     print("Scheme:", details.url_scheme())
     print("Domian:", details.url_domain())
