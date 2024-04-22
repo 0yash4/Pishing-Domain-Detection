@@ -1,4 +1,5 @@
 import sys
+from dataclasses import dataclass
 from urllib.parse import parse_qs, urlparse
 
 from src.exception import CustomException
@@ -6,6 +7,7 @@ from src.logger import logging
 from src.url.url_substrings import URLSubStrings
 
 
+@dataclass
 class url_details:
     def __init__(self, url):
        #Importing and creating the object of Url Substrings
@@ -19,21 +21,30 @@ class url_details:
        self.url_directory = self.url_substrings.url_directory()
        #To avoid Path/File and Directory are same.
        if self.url_path_file == self.url_directory:
-           self.url_directory = None
+           self.url_path_file = None
            
-    def url_substrings_length(self):
+    #Creating 5 different methods to claculate the length for different parts of URL
+    def url_length(self):
         length_url = len(self.url)
+        return length_url
+    
+    def domain_length(self):
         domain_length = len(self.url_domain)
-        # Above we assigned Directory = None as it is used in most cases but in this case we need Directory = 0 to count length so used if statement to create an exception
-        if self.url_directory is None:
-            self.url_directory = ""
-            directory_length = len(self.url_directory)
+        return domain_length
+    
+    def directory_length(self):
+        directory_length = len(self.url_directory)
+        return directory_length
+    
+    def file_path_length(self):
+        if self.url_path_file is None:
+            self.url_path_file = ""
         file_length = len(self.url_path_file)
+        return file_length
+    
+    def params_length(self):
         params_length = len(self.url_parameters)
-        
-        return (length_url, domain_length, 
-               directory_length, file_length,
-               params_length)
+        return params_length
         
     def qty_tld_url(self):
         try:
@@ -102,10 +113,9 @@ class url_details:
                     # If the character is a sign, increment its count
                     if char in signs:
                         sign_counts[char] += 1
-                        
-            # Return the the dictionary of sign counts
-            return sign_counts  
-            
+             
+            return sign_counts
+        
         except Exception as e:
             raise CustomException(e, sys)
         
@@ -126,9 +136,7 @@ class url_details:
                     # If the character is a sign, increment its count
                     if char in signs:
                         sign_counts[char] += 1
-
-            # Return the sign counts
-            return sign_counts  
+            return sign_counts
             logging.info("Counted the number of signs in URL Domain")
             
         except Exception as e:
@@ -141,33 +149,18 @@ class url_details:
 
             # Initialize a dictionary to store the count of each sign
             sign_counts = {sign: 0 for sign in signs}
-            ''' 
-            Sometimes Path/File and directory are same in few links 
-            If Directory == Path/File then Directory will be set to none 
-            and returns 0 to every sign available   
 
-            '''
-            
-            if self.url_directory == None:
-                return sign_counts
-            else:
+            # Iterate over each character in the URL directory
+            for char in self.url_directory:
+                # If the character is a sign, increment its count
+                if char in signs:
+                    sign_counts[char] += 1
 
-                words = self.url_directory
+            return sign_counts
 
-                # Iterate over each word
-                for word in words:
-                    # Iterate over each character in the word
-                    for char in word:
-                        # If the character is a sign, increment its count
-                        if char in signs:
-                            sign_counts[char] += 1
-
-                # Return the sign counts
-                return sign_counts  
-            logging.info("Counted the number of signs in URL Directory")
-            
         except Exception as e:
             raise CustomException(e, sys)
+
         
     def count_signs_in_url_path_file(self):
         try:
@@ -177,19 +170,22 @@ class url_details:
             # Initialize a dictionary to store the count of each sign
             sign_counts = {sign: 0 for sign in signs}
             
-            words = self.url_path_file
+            # If URL directory is None, return the empty sign counts
+            if self.url_path_file is None:
+                return sign_counts
+            else:
+                words = self.url_path_file
 
-            # Iterate over each word
-            for word in words:
-                # Iterate over each character in the word
-                for char in word:
-                    # If the character is a sign, increment its count
-                    if char in signs:
-                        sign_counts[char] += 1
-
-            # Return the sign counts
-            return sign_counts  
-            logging.info("Counted the number of signs in URL Path/File")
+                # Iterate over each word
+                for word in words:
+                    # Iterate over each character in the word
+                    for char in word:
+                        # If the character is a sign, increment its count
+                        if char in signs:
+                            sign_counts[char] += 1   
+                            
+                    # Return the sign counts
+                return sign_counts
             
         except Exception as e:
             raise CustomException(e, sys)
@@ -211,6 +207,9 @@ class url_details:
                     # If the character is a sign, increment its count
                     if char in signs:
                         sign_counts[char] += 1
+            
+                # Return the sign counts
+                return sign_counts  
 
             # Return the sign counts
             return sign_counts  
@@ -218,22 +217,21 @@ class url_details:
             
         except Exception as e:
             raise CustomException(e, sys)
-        
-        
-        
-    
+
+
+
+
 if __name__ == "__main__":
-    url1 = "https://example.com/search?query=python&category=tutorials&sort=popularity"
+    url1 = "https://example.com/sea../.rc..h?query=python&category=tutorials&sort=popularity"
     url = url_details(url1)
     print(url.count_signs_in_url_parameters())
     print(url.count_signs_in_url_path_file())
     print(url.count_signs_in_url_directory())
     print(url.count_signs_in_url_domain())
     print(url.count_signs_in_url())
-    length_url, domain_length, directory_length, file_length, params_length = url.url_substrings_length()
-    print("url_substrings_length", length_url, "domain_length", domain_length,
-                "directory_length", directory_length, "file legth", file_length, 
-                        "params_legth", params_length)
+    print("url_substrings_length", url.url_length(), "domain_length", url.domain_length(),
+                "directory_length", url.directory_length(), "file legth", url.file_path_length(), 
+                        "params_legth", url.params_length())
     print("qty_tld_url", url.qty_tld_url())
     print(url.qty_vowels_domain())
     print("tld_present_params", url.tld_present_params())

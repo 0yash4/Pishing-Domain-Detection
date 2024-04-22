@@ -18,6 +18,7 @@ from src.logger import logging
 from src.url.url_substrings import URLSubStrings
 
 load_dotenv()
+#Calling API's. API keys are stored in .env file
 API_KEY = os.getenv("API_KEY")
 CX_KEY = os.getenv("CX_KEY")
 

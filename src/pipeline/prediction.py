@@ -1,224 +1,185 @@
-class CustomData:
-    def __init__(self, 
-             qty_dot_url: int,
-             qty_hyphen_url: int,
-             qty_underline_url: int,
-             qty_slash_url: int,
-             qty_questionmark_url: int,
-             qty_equal_url: int,
-             qty_at_url: int,
-             qty_and_url: int,
-             qty_exclamation_url: int,
-             qty_space_url: int,
-             qty_tilde_url: int,
-             qty_comma_url: int,
-             qty_plus_url: int,
-             qty_asterisk_url: int,
-             qty_hashtag_url: int,
-             qty_dollar_url: int,
-             qty_percent_url: int,
-             qty_tld_url: int,
-             length_url: int,
-             qty_dot_domain: int,
-             qty_hyphen_domain: int,
-             qty_underline_domain: int,
-             qty_slash_domain: int,
-             qty_questionmark_domain: int,
-             qty_equal_domain: int,
-             qty_at_domain: int,
-             qty_and_domain: int,
-             qty_exclamation_domain: int,
-             qty_space_domain: int,
-             qty_tilde_domain: int,
-             qty_comma_domain: int,
-             qty_plus_domain: int,
-             qty_asterisk_domain: int,
-             qty_hashtag_domain: int,
-             qty_dollar_domain: int,
-             qty_percent_domain: int,
-             qty_vowels_domain: int,
-             domain_length: int,
-             domain_in_ip: bool,
-             server_client_domain: bool,
-             qty_dot_directory: int,
-             qty_hyphen_directory: int,
-             qty_underline_directory: int,
-             qty_slash_directory: int,
-             qty_questionmark_directory: int,
-             qty_equal_directory: int,
-             qty_at_directory: int,
-             qty_and_directory: int,
-             qty_exclamation_directory: int,
-             qty_space_directory: int,
-             qty_tilde_directory: int,
-             qty_comma_directory: int,
-             qty_plus_directory: int,
-             qty_asterisk_directory: int,
-             qty_hashtag_directory: int,
-             qty_dollar_directory: int,
-             qty_percent_directory: int,
-             directory_length: int,
-             qty_dot_file: int,
-             qty_hyphen_file: int,
-             qty_underline_file: int,
-             qty_slash_file: int,
-             qty_questionmark_file: int,
-             qty_equal_file: int,
-             qty_at_file: int,
-             qty_and_file: int,
-             qty_exclamation_file: int,
-             qty_space_file: int,
-             qty_tilde_file: int,
-             qty_comma_file: int,
-             qty_plus_file: int,
-             qty_asterisk_file: int,
-             qty_hashtag_file: int,
-             qty_dollar_file: int,
-             qty_percent_file: int,
-             file_length: int,
-             qty_dot_params: int,
-             qty_hyphen_params: int,
-             qty_underline_params: int,
-             qty_slash_params: int,
-             qty_questionmark_params: int,
-             qty_equal_params: int,
-             qty_at_params: int,
-             qty_and_params: int,
-             qty_exclamation_params: int,
-             qty_space_params: int,
-             qty_tilde_params: int,
-             qty_comma_params: int,
-             qty_plus_params: int,
-             qty_asterisk_params: int,
-             qty_hashtag_params: int,
-             qty_dollar_params: int,
-             qty_percent_params: int,
-             params_length: int,
-             tld_present_params: bool,
-             qty_params: int,
-             email_in_url: bool,
-             time_response: int,
-             domain_spf: bool,
-             asn_ip: int,
-             time_domain_activation: int,
-             time_domain_expiration: int,
-             qty_ip_resolved: int,
-             qty_nameservers: int,
-             qty_mx_servers: int,
-             ttl_hostname: int,
-             tls_ssl_certificate: bool,
-             qty_redirects: int,
-             url_google_index: bool,
-             domain_google_index: bool,
-             url_shortened: bool):
-        self.qty_dot_url = qty_dot_url
-        self.qty_hyphen_url = qty_hyphen_url
-        self.qty_underline_url = qty_underline_url
-        self.qty_slash_url = qty_slash_url
-        self.qty_questionmark_url = qty_questionmark_url
-        self.qty_equal_url = qty_equal_url
-        self.qty_at_url = qty_at_url
-        self.qty_and_url = qty_and_url
-        self.qty_exclamation_url = qty_exclamation_url
-        self.qty_space_url = qty_space_url
-        self.qty_tilde_url = qty_tilde_url
-        self.qty_comma_url = qty_comma_url
-        self.qty_plus_url = qty_plus_url
-        self.qty_asterisk_url = qty_asterisk_url
-        self.qty_hashtag_url = qty_hashtag_url
-        self.qty_dollar_url = qty_dollar_url
-        self.qty_percent_url = qty_percent_url
-        self.qty_tld_url = qty_tld_url
-        self.length_url = length_url
-        self.qty_dot_domain = qty_dot_domain
-        self.qty_hyphen_domain = qty_hyphen_domain
-        self.qty_underline_domain = qty_underline_domain
-        self.qty_slash_domain = qty_slash_domain
-        self.qty_questionmark_domain = qty_questionmark_domain
-        self.qty_equal_domain = qty_equal_domain
-        self.qty_at_domain = qty_at_domain
-        self.qty_and_domain = qty_and_domain
-        self.qty_exclamation_domain = qty_exclamation_domain
-        self.qty_space_domain = qty_space_domain
-        self.qty_tilde_domain = qty_tilde_domain
-        self.qty_comma_domain = qty_comma_domain
-        self.qty_plus_domain = qty_plus_domain
-        self.qty_asterisk_domain = qty_asterisk_domain
-        self.qty_hashtag_domain = qty_hashtag_domain
-        self.qty_dollar_domain = qty_dollar_domain
-        self.qty_percent_domain = qty_percent_domain
-        self.qty_vowels_domain = qty_vowels_domain
-        self.domain_length = domain_length
-        self.domain_in_ip = domain_in_ip
-        self.server_client_domain = server_client_domain
-        self.qty_dot_directory = qty_dot_directory
-        self.qty_hyphen_directory = qty_hyphen_directory
-        self.qty_underline_directory = qty_underline_directory
-        self.qty_slash_directory = qty_slash_directory
-        self.qty_questionmark_directory = qty_questionmark_directory
-        self.qty_equal_directory = qty_equal_directory
-        self.qty_at_directory = qty_at_directory
-        self.qty_and_directory = qty_and_directory
-        self.qty_exclamation_directory = qty_exclamation_directory
-        self.qty_space_directory = qty_space_directory
-        self.qty_tilde_directory = qty_tilde_directory
-        self.qty_comma_directory = qty_comma_directory
-        self.qty_plus_directory = qty_plus_directory
-        self.qty_asterisk_directory = qty_asterisk_directory
-        self.qty_hashtag_directory = qty_hashtag_directory
-        self.qty_dollar_directory = qty_dollar_directory
-        self.qty_percent_directory = qty_percent_directory
-        self.directory_length = directory_length
-        self.qty_dot_file = qty_dot_file
-        self.qty_hyphen_file = qty_hyphen_file
-        self.qty_underline_file = qty_underline_file
-        self.qty_slash_file = qty_slash_file
-        self.qty_questionmark_file = qty_questionmark_file
-        self.qty_equal_file = qty_equal_file
-        self.qty_at_file = qty_at_file
-        self.qty_and_file = qty_and_file
-        self.qty_exclamation_file = qty_exclamation_file
-        self.qty_space_file = qty_space_file
-        self.qty_tilde_file = qty_tilde_file
-        self.qty_comma_file = qty_comma_file
-        self.qty_plus_file = qty_plus_file
-        self.qty_asterisk_file = qty_asterisk_file
-        self.qty_hashtag_file = qty_hashtag_file
-        self.qty_dollar_file = qty_dollar_file
-        self.qty_percent_file = qty_percent_file
-        self.file_length = file_length
-        self.qty_dot_params = qty_dot_params
-        self.qty_hyphen_params = qty_hyphen_params
-        self.qty_underline_params = qty_underline_params
-        self.qty_slash_params = qty_slash_params
-        self.qty_questionmark_params = qty_questionmark_params
-        self.qty_equal_params = qty_equal_params
-        self.qty_at_params = qty_at_params
-        self.qty_and_params = qty_and_params
-        self.qty_exclamation_params = qty_exclamation_params
-        self.qty_space_params = qty_space_params
-        self.qty_tilde_params = qty_tilde_params
-        self.qty_comma_params = qty_comma_params
-        self.qty_plus_params = qty_plus_params
-        self.qty_asterisk_params = qty_asterisk_params
-        self.qty_hashtag_params = qty_hashtag_params
-        self.qty_dollar_params = qty_dollar_params
-        self.qty_percent_params = qty_percent_params
-        self.params_length = params_length
-        self.tld_present_params = tld_present_params
-        self.qty_params = qty_params
-        self.email_in_url = email_in_url
-        self.time_response = time_response
-        self.domain_spf = domain_spf
-        self.asn_ip = asn_ip
-        self.time_domain_activation = time_domain_activation
-        self.time_domain_expiration = time_domain_expiration
-        self.qty_ip_resolved = qty_ip_resolved
-        self.qty_nameservers = qty_nameservers
-        self.qty_mx_servers = qty_mx_servers
-        self.ttl_hostname = ttl_hostname
-        self.tls_ssl_certificate = tls_ssl_certificate
-        self.qty_redirects = qty_redirects
-        self.url_google_index = url_google_index
-        self.domain_google_index = domain_google_index
-        self.url_shortened = url_shortened
+from dataclasses import dataclass
+
+from src.exception import CustomException
+from src.logger import logging
+from src.url.url_credentials import url_credentials
+from src.url.url_details import url_details
+
+
+@dataclass
+class classes_initailization:
+    def __init__(self, url):
+        # Initializing All the imported classes
+        self.url_credentials = url_credentials(url)
+        self.url_details = url_details(url)
+        
+class me_try:
+    def __init__(self, url):
+        self.classes_initailization = classes_initailization(url)
+        self.length_url = self.classes_initailization.url_details.url_length()
+        
+    def length(self):
+        qty_dot = self.classes_initailization.url_details.count_signs_in_url()["."]
+        return qty_dot
+    
+class CustomData1:
+    def __init__(self, url):
+        self.classes_initailization = classes_initailization(url)
+        self.qty_dot_url = self.classes_initailization.url_details.count_signs_in_url()["."]
+        self.qty_hyphen_url = self.classes_initailization.url_details.count_signs_in_url()["-"]
+        self.qty_underline_url = self.classes_initailization.url_details.count_signs_in_url()["_"]
+        self.qty_slash_url = self.classes_initailization.url_details.count_signs_in_url()["/"]
+        self.qty_questionmark_url = self.classes_initailization.url_details.count_signs_in_url()["?"]
+        self.qty_equal_url = self.classes_initailization.url_details.count_signs_in_url()["="]
+        self.qty_at_url = self.classes_initailization.url_details.count_signs_in_url()["@"]
+        self.qty_and_url = self.classes_initailization.url_details.count_signs_in_url()["&"]
+        self.qty_exclamation_url = self.classes_initailization.url_details.count_signs_in_url()["!"]
+        self.qty_space_url = self.classes_initailization.url_details.count_signs_in_url()[" "]
+
+class CustomData2:
+    def __init__(self, url):
+        self.classes_initailization = classes_initailization(url)
+        self.qty_tilde_url = self.classes_initailization.url_details.count_signs_in_url()["∼"]
+        self.qty_comma_url = self.classes_initailization.url_details.count_signs_in_url()[","]
+        self.qty_plus_url = self.classes_initailization.url_details.count_signs_in_url()["+"]
+        self.qty_asterisk_url = self.classes_initailization.url_details.count_signs_in_url()["*"]
+        self.qty_hashtag_url = self.classes_initailization.url_details.count_signs_in_url()["#"]
+        self.qty_dollar_url = self.classes_initailization.url_details.count_signs_in_url()["$"]
+        self.qty_percent_url = self.classes_initailization.url_details.count_signs_in_url()["%"]
+        self.qty_tld_url = self.classes_initailization.url_details.qty_tld_url()
+        self.length_url = self.classes_initailization.url_details.url_length()
+        self.qty_dot_domain = self.classes_initailization.url_details.count_signs_in_url_domain()["."]
+
+class CustomData3:
+    def __init__(self, url):
+        self.classes_initailization = classes_initailization(url)
+        self.qty_hyphen_domain = self.classes_initailization.url_details.count_signs_in_url_domain()["-"]
+        self.qty_underline_domain = self.classes_initailization.url_details.count_signs_in_url_domain()["_"]
+        self.qty_slash_domain = self.classes_initailization.url_details.count_signs_in_url_domain()["/"]
+        self.qty_questionmark_domain = self.classes_initailization.url_details.count_signs_in_url_domain()["?"]
+        self.qty_equal_domain = self.classes_initailization.url_details.count_signs_in_url_domain()["="]
+        self.qty_at_domain = self.classes_initailization.url_details.count_signs_in_url_domain()["@"]
+        self.qty_and_domain = self.classes_initailization.url_details.count_signs_in_url_domain()["&"]
+        self.qty_exclamation_domain = self.classes_initailization.url_details.count_signs_in_url_domain()["!"]
+        self.qty_space_domain = self.classes_initailization.url_details.count_signs_in_url_domain()[" "]
+        self.qty_tilde_domain = self.classes_initailization.url_details.count_signs_in_url_domain()["∼"]
+
+class CustomData4:
+    def __init__(self, url):
+        self.classes_initailization = classes_initailization(url)
+        self.qty_comma_domain = self.classes_initailization.url_details.count_signs_in_url_domain()[","]
+        self.qty_plus_domain = self.classes_initailization.url_details.count_signs_in_url_domain()["+"]
+        self.qty_asterisk_domain = self.classes_initailization.url_details.count_signs_in_url_domain()["*"]
+        self.qty_hashtag_domain = self.classes_initailization.url_details.count_signs_in_url_domain()["#"]
+        self.qty_dollar_domain = self.classes_initailization.url_details.count_signs_in_url_domain()["$"]
+        self.qty_percent_domain = self.classes_initailization.url_details.count_signs_in_url_domain()["%"]
+        self.qty_vowels_domain = self.classes_initailization.url_details.qty_vowels_domain()
+        self.domain_length = self.classes_initailization.url_details.domain_length()
+        self.domain_in_ip = self.classes_initailization.url_credentials.domain_in_ip()
+        self.server_client_domain = self.classes_initailization.url_credentials.server_client_domain()
+
+class CustomData5:
+    def __init__(self, url):
+        self.classes_initailization = classes_initailization(url)
+        self.qty_dot_directory = self.classes_initailization.url_details.count_signs_in_url_directory()["."]
+        self.qty_hyphen_directory = self.classes_initailization.url_details.count_signs_in_url_directory()["-"]
+        self.qty_underline_directory = self.classes_initailization.url_details.count_signs_in_url_directory()["_"]
+        self.qty_slash_directory = self.classes_initailization.url_details.count_signs_in_url_directory()["/"]
+        self.qty_questionmark_directory = self.classes_initailization.url_details.count_signs_in_url_directory()["?"]
+        self.qty_equal_directory = self.classes_initailization.url_details.count_signs_in_url_directory()["="]
+        self.qty_at_directory = self.classes_initailization.url_details.count_signs_in_url_directory()["@"]
+        self.qty_and_directory = self.classes_initailization.url_details.count_signs_in_url_directory()["&"]
+        self.qty_exclamation_directory = self.classes_initailization.url_details.count_signs_in_url_directory()["!"]
+        self.qty_space_directory = self.classes_initailization.url_details.count_signs_in_url_directory()[" "]
+
+class CustomData6:
+    def __init__(self, url):
+        self.classes_initailization = classes_initailization(url)
+        self.qty_tilde_directory = self.classes_initailization.url_details.count_signs_in_url_directory()["∼"]
+        self.qty_comma_directory = self.classes_initailization.url_details.count_signs_in_url_directory()[","]
+        self.qty_plus_directory = self.classes_initailization.url_details.count_signs_in_url_directory()["+"]
+        self.qty_asterisk_directory = self.classes_initailization.url_details.count_signs_in_url_directory()["*"]
+        self.qty_hashtag_directory = self.classes_initailization.url_details.count_signs_in_url_directory()["#"]
+        self.qty_dollar_directory = self.classes_initailization.url_details.count_signs_in_url_directory()["$"]
+        self.qty_percent_directory = self.classes_initailization.url_details.count_signs_in_url_directory()["%"]
+        self.directory_length = self.classes_initailization.url_details.directory_length()
+        self.qty_dot_file = self.classes_initailization.url_details.count_signs_in_url_path_file()["."]
+        self.qty_hyphen_file = self.classes_initailization.url_details.count_signs_in_url_path_file()["-"]
+        
+class CustomData7:
+    def __init__(self, url):
+        self.classes_initailization = classes_initailization(url)
+        self.qty_underline_file = self.classes_initailization.url_details.count_signs_in_url_path_file()["_"]
+        self.qty_slash_file = self.classes_initailization.url_details.count_signs_in_url_path_file()["/"]
+        self.qty_questionmark_file = self.classes_initailization.url_details.count_signs_in_url_path_file()["?"]
+        self.qty_equal_file = self.classes_initailization.url_details.count_signs_in_url_path_file()["="]
+        self.qty_at_file = self.classes_initailization.url_details.count_signs_in_url_path_file()["@"]
+        self.qty_and_file = self.classes_initailization.url_details.count_signs_in_url_path_file()["&"]
+        self.qty_exclamation_file = self.classes_initailization.url_details.count_signs_in_url_path_file()["!"]
+        self.qty_space_file = self.classes_initailization.url_details.count_signs_in_url_path_file()[" "]
+        self.qty_tilde_file = self.classes_initailization.url_details.count_signs_in_url_path_file()["∼"]
+        self.qty_comma_file = self.classes_initailization.url_details.count_signs_in_url_path_file()[","]
+
+class CustomData8:
+    def __init__(self, url):
+        self.classes_initailization = classes_initailization(url)
+        self.qty_plus_file = self.classes_initailization.url_details.count_signs_in_url_path_file()["+"]
+        self.qty_asterisk_file = self.classes_initailization.url_details.count_signs_in_url_path_file()["*"]
+        self.qty_hashtag_file = self.classes_initailization.url_details.count_signs_in_url_path_file()["#"]
+        self.qty_dollar_file = self.classes_initailization.url_details.count_signs_in_url_path_file()["$"]
+        self.qty_percent_file = self.classes_initailization.url_details.count_signs_in_url_path_file()["%"]
+        self.file_length = self.classes_initailization.url_details.file_path_length()
+        self.qty_dot_params = self.classes_initailization.url_details.count_signs_in_url_parameters()["."]
+        self.qty_hyphen_params = self.classes_initailization.url_details.count_signs_in_url_parameters()["-"]
+        self.qty_underline_params = self.classes_initailization.url_details.count_signs_in_url_parameters()["_"]
+        self.qty_slash_params = self.classes_initailization.url_details.count_signs_in_url_parameters()["/"]
+
+class CustomData9:
+    def __init__(self, url):
+        self.classes_initailization = classes_initailization(url)
+        self.qty_questionmark_params = self.classes_initailization.url_details.count_signs_in_url_parameters()["?"]
+        self.qty_equal_params = self.classes_initailization.url_details.count_signs_in_url_parameters()["="]
+        self.qty_at_params = self.classes_initailization.url_details.count_signs_in_url_parameters()["@"]
+        self.qty_and_params = self.classes_initailization.url_details.count_signs_in_url_parameters()["&"]
+        self.qty_exclamation_params = self.classes_initailization.url_details.count_signs_in_url_parameters()["!"]
+        self.qty_space_params = self.classes_initailization.url_details.count_signs_in_url_parameters()[" "]
+        self.qty_tilde_params = self.classes_initailization.url_details.count_signs_in_url_parameters()["∼"]
+        self.qty_comma_params = self.classes_initailization.url_details.count_signs_in_url_parameters()[","]
+        self.qty_plus_params = self.classes_initailization.url_details.count_signs_in_url_parameters()["+"]
+        self.qty_asterisk_params = self.classes_initailization.url_details.count_signs_in_url_parameters()["*"]
+
+class CustomData10:
+    def __init__(self, url):
+        self.classes_initailization = classes_initailization(url)
+        self.qty_hashtag_params = self.classes_initailization.url_details.count_signs_in_url_parameters()["#"]
+        self.qty_dollar_params = self.classes_initailization.url_details.count_signs_in_url_parameters()["$"]
+        self.qty_percent_params = self.classes_initailization.url_details.count_signs_in_url_parameters()["%"]
+        self.params_length = self.classes_initailization.url_details.params_length()
+        self.tld_present_params = self.classes_initailization.url_details.tld_present_params()
+        self.qty_params = self.classes_initailization.url_details.qty_params()
+        self.email_in_url = self.classes_initailization.url_credentials.email_in_url()
+        self.time_response = self.classes_initailization.url_credentials.time_response()
+        self.domain_spf = self.classes_initailization.url_credentials.domain_spf()
+        self.asn_ip = self.classes_initailization.url_credentials.asn_ip()
+
+class CustomData11:
+    def __init__(self, url):
+        self.classes_initailization = classes_initailization(url)
+        self.time_domain_activation, self.time_domain_expiration = self.classes_initailization.url_credentials.time_domain_activation_expiration()
+        self.qty_ip_resolved = self.classes_initailization.url_credentials.qty_ip_resolved()
+        self.qty_nameservers = self.classes_initailization.url_credentials.qty_nameservers()
+        self.qty_mx_servers = self.classes_initailization.url_credentials.qty_mx_servers()
+        self.ttl_hostname = self.classes_initailization.url_credentials.ttl_hostname()
+        self.tls_ssl_certificate = self.classes_initailization.url_credentials.tls_ssl_certificate()
+        self.qty_redirects = self.classes_initailization.url_credentials.qty_redirects()
+        self.url_google_index = self.classes_initailization.url_credentials.url_google_index()
+        self.domain_google_index = self.classes_initailization.url_credentials.domain_google_index()
+        self.url_shortened = self.classes_initailization.url_credentials.url_shortened()
+
+    
+
+
+if __name__ == "__main__":
+    url1 = "https://example.com/search?qu..ery=python&category=tutorials&sort=popularity"
+    init = me_try(url1)
+    print(init.length())
