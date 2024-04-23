@@ -66,7 +66,7 @@ class url_details:
             # Defining Vowels
             vowels = ["a", "e", "i", "o", "u"]
             #initialize the sign count
-            vowels_counts = {vowels: 0 for vowels in vowels}
+            vowels_counts = 0
             # Split Domain in words
             words = self.url_domain.split()
             
@@ -76,7 +76,7 @@ class url_details:
                 for char in word:
                     # If the character is a sign, increment its count
                     if char in vowels:
-                        vowels_counts[char] += 1
+                        vowels_counts += 1
                         
             # Return the the dictionary of sign counts
             return vowels_counts  
@@ -222,7 +222,7 @@ class url_details:
 
 
 if __name__ == "__main__":
-    url1 = "https://example.com/sea../.rc..h?query=python&category=tutorials&sort=popularity"
+    url1 = "https://twitter.com/home"
     url = url_details(url1)
     print(url.count_signs_in_url_parameters())
     print(url.count_signs_in_url_path_file())

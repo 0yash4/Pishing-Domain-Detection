@@ -274,8 +274,8 @@ class url_credentials():
         try:
             ipaddress.ip_address(self.url_domain)
             return 1
-        except Exception as e:
-            logging.error("Domain in IP error", e)
+        except Exception :
+            
             return 0
         
     def server_client_domain(self):
