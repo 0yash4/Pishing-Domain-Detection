@@ -274,8 +274,7 @@ class url_credentials():
         try:
             ipaddress.ip_address(self.url_domain)
             return 1
-        except Exception :
-            
+        except Exception:            
             return 0
         
     def server_client_domain(self):

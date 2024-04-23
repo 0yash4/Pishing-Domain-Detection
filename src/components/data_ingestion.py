@@ -32,8 +32,8 @@ class data_initailization:
             print("Output data shape:", output_data.shape)
             
             if input_data.shape[0] == output_data.shape[0]:
-                input_data.to_csv(self.ingestion_config.input_data_path, index=False, header=False)
-                output_data.to_csv(self.ingestion_config.output_data_path, index=False, header=False)
+                input_data.to_csv(self.ingestion_config.input_data_path, index=False)
+                output_data.to_csv(self.ingestion_config.output_data_path, index=False)
                 
                 logging.info("Ingestion of data is completed.")
             

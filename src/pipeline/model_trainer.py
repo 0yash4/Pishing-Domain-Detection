@@ -46,6 +46,7 @@ class model_training:
                 grid_search.fit(input_data, output_data)
                 best_params = grid_search.best_params_
                 best_model = grid_search.best_estimator_
+                #feature_name = model.get_feature_names_out()
                 accuracy = cross_val_score(best_model, input_data, 
                                            output_data, cv=5, scoring='accuracy').mean()
                 results[name] = {'accuracy': accuracy, 'best_params': best_params}
@@ -54,6 +55,7 @@ class model_training:
                 raise CustomException("No best model found")
             else:
                 logging.info(f"Best model found with the accuracy score of {accuracy}")
+                #logging.info(f"Columns = {feature_name}")
             
             save_object(
                 self.model_trainer_config.trained_model_file_path,
