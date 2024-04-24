@@ -317,11 +317,12 @@ class custom_final_df:
         df_credentials = self.custom_data_credentials.df_credentials()
         
         final_df = pd.concat([df_url, df_domain, df_directory, df_file, df_params, df_credentials], axis=1)
+        #final_df["url_shortened"] = 0
         #df = final_df.drop(columns="email_in_url", axis=1)
         return final_df
 
 
 if __name__ == "__main__":
-    url1 = "https://www.kaggle.com/code/o4yashchoudhary/pishing-domain-model-trainer/editb"
+    url1 = input("Url: ")
     init = custom_final_df(url1)
     print(init.final_df())

@@ -19,4 +19,8 @@ url = st.text_input(label="Enter the URL")
 if st.button(label="Check Pish or not"):
     custom_data = custom_final_df(url)
     df = custom_data.final_df()
-    model.predict([[df]])
+    predict = model.predict(df)
+    if predict[0] == 1:
+        st.write("Given is a Phishing Site")
+    else:
+        st.write("It's safe")

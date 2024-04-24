@@ -243,9 +243,9 @@ class url_credentials():
     def url_shortened(self):
         try:
            # Get the path component of the URL
-            path = self.url_path_file
+            path = self.url_domain
             # Check if the length of the path is shorter than a threshold
-            if len(path) <= 15:  # Adjust the threshold as needed
+            if len(path) <= 10:  # Adjust the threshold as needed
                 return 1
             else: 
                 return 0
